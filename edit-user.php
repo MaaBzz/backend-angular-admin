@@ -5,7 +5,7 @@ include 'jwt-helper.php';
 
 $user = extractJwtBody();
 
-if ($user->role != "Administrateur") {
+if ($user->role != "Admin") {
     http_response_code(403);
     echo '{"message" : "Vous n\avez pas les droits nécessaires"}';
     exit();

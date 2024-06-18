@@ -5,7 +5,7 @@ include 'jwt-helper.php';
 
 $user = extractJwtBody();
 
-if ($user->role != "Administrateur") {
+if ($user->role != "Admin") {
     http_response_code(403);
     echo '{"message" : "Vous n\avez pas les droits nécessaires"}';
     exit();
@@ -20,7 +20,7 @@ if (!isset($_GET['id'])) {
 $idUser = $_GET['id'];
 
 //On recupère l'utilisdateur dans la bdd
-$requete = $connexion->prepare("SELECT * FROM user WHERE id = ?");
+$requete = $connexion->prepare("SELECT * FROM utilisateur WHERE id_user = ?");
 $requete->execute([$idUser]);
 $user = $requete->fetch();
 
@@ -31,7 +31,7 @@ if (!$user) {
     exit();
 }
 
-$requete = $connexion->prepare("DELETE FROM user WHERE id = ?");
+$requete = $connexion->prepare("DELETE FROM utilisateur WHERE id_user = ?");
 
 $requete->execute([$idUser]);
 
